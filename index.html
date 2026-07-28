@@ -707,7 +707,7 @@
     const alerts = [];
     records.forEach(function(r) {
       const griev = checkGrievanceWindow(r.dateIssued, r.grievanceStatus, r.grievanceDate);
-      if (griev.status === 'expired') alerts.push({ type: 'urgent', html: '<strong>⏰ GRIEVANCE EXPIRED — ' + esc(r.memberName) + '</strong> ' + esc(r.category) + ' #' + r.occurrenceNumber + '.' });
+      if (griev.status === 'expired') alerts.push({ type: 'urgent', html: '<strong>⏰ GRIEVANCE EXPIRED — ' + esc(r.memberName) + '</strong> ' + esc(r.category) + '#' + r.occurrenceNumber + '.' });
       else if (griev.status === 'open' && griev.workingDaysLeft <= 3) alerts.push({ type: 'warning', html: '<strong>⚠️ Urgent — ' + esc(r.memberName) + '</strong> ' + griev.workingDaysLeft + ' wd left to file.' });
       const mgmt = checkManagement10Day(r.dateOfOccurrence, r.dateIssued);
       if (mgmt.status === 'late') alerts.push({ type: 'info', html: '<strong>📋 Late discipline — ' + esc(r.memberName) + '</strong> ' + mgmt.daysLate + 'd past 10-day window.' });
