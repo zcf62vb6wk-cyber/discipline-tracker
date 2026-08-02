@@ -1995,48 +1995,23 @@ document.getElementById("discipline-step-select").value = expectedStep;
 			}
 
 			function updateOccurrencePreview() {
-				const name = document
-					.getElementById("member-name")
-					.value.trim();
-				const category = document.getElementById("category").value;
-				if (!name || !category) {
-					hideOccurrencePreview();
-					return;
-				}
-				const records = loadLocalRecords();
-				const windowStart = getRollingWindowStartDate();
-				const occNum = getOccurrenceNumber(name, category, records);
-				const totalRecords = records.filter(function (r) {
-					return (
-						r.memberName.toLowerCase().trim() ===
-							name.toLowerCase().trim() && r.category === category
-					);
-				});
-				const oldRecords = totalRecords.filter(function (r) {
-					return new Date(r.dateOfOccurrence) < windowStart;
-				}).length;
-				const expectedStep = getExpectedStep(category, occNum);
-				document.getElementById("occurrence-text").innerHTML =
-					"<strong>Occurrence #" +
-					occNum +
-					"</strong> (within 9-month window) for " +
-					esc(name) +
-					" — <strong>" +
-					esc(category) +
-					"</strong><br>Expected step: <strong>" +
-					esc(expectedStep) +
-					"</strong>" +
-					(oldRecords > 0
-						? '<br><span style="font-size:0.85rem;color:#ffa000;">⚠️ ' +
-						  oldRecords +
-						  " older record(s) outside 9-month window (don't count)</span>"
-						: "");
-				document.getElementById("occurrence-preview").style.display = "block";
-document.getElementById("occurrence-number-input").value = occNum;
-document.getElementById("expected-step-display").innerHTML =
-    "Expected step: <strong>" + esc(expectedStep) + "</strong>";
-document.getElementById("discipline-step-select").value = expectedStep;
-			}
+    const name = document.getElementById("member-name").value.trim();
+    const category = document.getElementById("category").value;
+    if (!name || !category) {
+        hideOccurrencePreview();
+        return;
+    }
+    const records = loadLocalRecords();
+    const windowStart = getRollingWindowStartDate();
+    const occNum = getOccurrenceNumber(name, category, records);
+    const expectedStep = getExpectedStep(category, occNum);
+
+    document.getElementById("occurrence-preview").style.display = "block";
+    document.getElementById("occurrence-number-input").value = occNum;
+    document.getElementById("expected-step-display").innerHTML =
+        "Expected step: <strong>" + esc(expectedStep) + "</strong>";
+    document.getElementById("discipline-step-select").value = expectedStep;
+}
 
 			function hideOccurrencePreview() {
 				document.getElementById("occurrence-preview").style.display =
