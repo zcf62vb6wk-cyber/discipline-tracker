@@ -864,7 +864,7 @@
 									<th>Issued</th>
 									<th>Mgmt</th>
 									<th>Supervisor</th>
-									<th>Grievance</th>
+									<th>Days to File</th>
 									<th>CLH</th>
 									<th>Outcome</th>
 									<th>Steward</th>
@@ -2535,7 +2535,7 @@ const occNum = manualOccNum ? parseInt(manualOccNum) : getOccurrenceNumber(membe
 							stepBadgeClass(eff.nextStep) +
 							'">' +
 							esc(eff.nextStep) +
-							'</span><br><table style="font-size:0.78rem;margin-top:6px;"><thead><tr><th>#</th><th>Step</th><th>Occur</th><th>Issued</th><th>Grievance</th><th>CLH</th><th>Status</th></tr></thead><tbody>';
+							'</span><br><table style="font-size:0.78rem;margin-top:6px;"><thead><tr><th>#</th><th>Step</th><th>Occur</th><th>Issued</th><th>Days to File</th><th>CLH</th><th>Status</th></tr></thead><tbody>';
 						recs.forEach(function (r) {
 							const inWindow =
 								new Date(r.dateOfOccurrence) >= windowStart;
