@@ -1435,10 +1435,11 @@ function updateExpectedStepFromManual() {
     if (!occNum || !category) return;
 
     const expectedStep = getExpectedStep(category, parseInt(occNum));
-    document.getElementById("expected-step-display").innerHTML =
-        "Expected step: <strong>" + esc(expectedStep) + "</strong>";
-    // Also update the discipline step dropdown
-    document.getElementById("discipline-step-select").value = expectedStep;
+    document.getElementById("occurrence-preview").style.display = "block";
+document.getElementById("occurrence-number-input").value = occNum;
+document.getElementById("expected-step-display").innerHTML =
+    "Expected step: <strong>" + esc(expectedStep) + "</strong>";
+document.getElementById("discipline-step-select").value = expectedStep;
 }
 			function addDays(date, n) {
 				const d = new Date(date);
@@ -2088,11 +2089,9 @@ document.getElementById("discipline-step-select").value = expectedStep;
 							return;
 						}
 						const records = loadLocalRecords();
-						const occNum = getOccurrenceNumber(
-							memberName,
-							category,
-							records
-						);
+						// Use manual override if provided, otherwise auto-calculate
+const manualOccNum = document.getElementById("occurrence-number-input").value;
+const occNum = manualOccNum ? parseInt(manualOccNum) : getOccurrenceNumber(memberName, category, records);
 						const expectedStep = getExpectedStep(category, occNum);
 						const actualStep = document.getElementById(
 							"discipline-step-select"
